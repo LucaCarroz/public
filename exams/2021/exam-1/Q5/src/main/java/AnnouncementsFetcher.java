@@ -21,16 +21,19 @@ public final class AnnouncementsFetcher {
     // - Announcements may begin with a day of the month (as a number) then a ':::' separator, in which case they should only be shown on that day
     // - The ':::' separator immediately after the day of month is not a part of the announcement and does not occur otherwise
 
+    private String serverUrlName;
+
     /** Creates a new announcement fetcher. */
-    public AnnouncementsFetcher() {
+    public AnnouncementsFetcher(String serverUrlName) {
         // TODO it would be nice if this class's dependencies were explicit and given in the constructor.
+        this.serverUrlName = serverUrlName;
     }
 
     /** Fetches announcements from the server. */
     public void fetch() {
         URL serverUrl;
         try {
-            serverUrl = new URL("https://superquiz.example.org/announcements");
+            serverUrl = new URL(serverUrlName);
         } catch (MalformedURLException e) {
             throw new AssertionError("The URL to the backend is malformed.", e);
         }
